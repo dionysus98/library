@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Monoton&family=Red+Hat+Mono:ital@0;1&display=swap");
+
+* {
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+html {
+  font-size: 62.5%;
+}
+:root {
+  --color__main: #5cdb95;
+  --color__main--light: #8ee4af;
+  --color__main--dark: #379683;
+  --color__sec: #05386b;
+  --color__ter: #edf5e1;
+  --color__black: #000;
+  --color__white: #fff;
+  --color__grey: #777;
+  --font__default: "Red Hat Mono", monospace;
+  --font__header: "Lobster", cursive;
+  --border-right: 0.5px solid var(--color__main--dark);
+}
+body {
+  margin: 0 auto;
+  background-color: var(--color__main);
+  font-family: var(--font__default);
+  /* overflow: hidden; */
+}
+.main {
+  max-height: 100vh;
+}
+.header {
+  text-align: center;
+  border-bottom: var(--border-right);
+}
+.header__title {
+  font-family: var(--font__header);
+  font-size: 3.5rem;
+  color: var(--color__ter);
+  text-shadow: 1px 1px 2px var(--color__black);
+  transition: all 0.4s;
+  backface-visibility: hidden;
+}
+.header__title:hover {
+  transform: skewX(10deg) translateY(-4px);
+  text-shadow: 2px 2px 1px var(--color__black);
+}
+.container {
+  display: flex;
+  height: 100vh;
+}
+.container__display {
+  background-color: var(--color__main--light);
+  width: 75%;
+  overflow-y: scroll;
+}
+.container__control {
+  width: 25%;
+}
+
+.status,
+.book-header,
+.book {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid var(--color__main--dark);
+  text-align: center;
+}
+
+.status__read,
+.status__pending,
+.status__total {
+  width: 33.3%;
+  border-right: var(--border-right);
+}
+
+.book__text--id,
+.book-header__text--id {
+  width: 10%;
+  border-right: var(--border-right);
+}
+.book__text--title,
+.book-header__text--title {
+  width: 30%;
+  border-right: var(--border-right);
+}
+.book__text--author,
+.book-header__text--author {
+  width: 30%;
+  border-right: var(--border-right);
+}
+.book__text--pages,
+.book-header__text--pages {
+  width: 10%;
+  border-right: var(--border-right);
+}
+.book__text--status,
+.book-header__text--status {
+  width: 20%;
+  border-right: var(--border-right);
+}
+.book__text--remove,
+.book-header__text--remove {
+  width: 5%;
+  border-right: var(--border-right);
+}
