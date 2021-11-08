@@ -57,26 +57,26 @@
 
           <section class="book">
             <div class="book__text--id">
-              <h2 class="book__text--header" id="id-book">ID</h2>
+              <h2 class="book__text--header id-book" id="">ID</h2>
             </div>
             <div class="book__text--title">
-              <h2 class="book__text--header" id="title-book">
+              <h2 class="book__text--header title-book" id="">
                 Crime and Punishment
               </h2>
             </div>
             <div class="book__text--author">
-              <h2 class="book__text--header" id="author-book">
+              <h2 class="book__text--header author-book" id="">
                 Fyodor Dostoevsky
               </h2>
             </div>
             <div class="book__text--pages">
-              <h2 class="book__text--header" id="pages-book">988</h2>
+              <h2 class="book__text--header pages-book" id="">988</h2>
             </div>
             <div class="book__text--status">
-              <h2 class="book__text--header" id="status-book">completed</h2>
+              <h2 class="book__text--header status-book" id="">completed</h2>
             </div>
             <div class="book__text--remove">
-              <h2 class="book__text--header" id="remove-book">X</h2>
+              <h2 class="book__text--header remove-book" id="">X</h2>
             </div>
           </section>
         </div>
@@ -85,19 +85,19 @@
           <h2 class="container__control--main">Add Book</h2>
           <form class="book-control">
             <label for="book-id">Book ID</label>
-            <input type="text" name="book-id" id="book-id" />
+            <input type="text" name="book-id" required id="book-id" />
 
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" />
+            <input type="text" name="title" required id="title" />
 
             <label for="author">Author</label>
-            <input type="text" name="author" id="author" />
+            <input type="text" name="author" required id="author" />
 
             <label for="pages">pages</label>
-            <input type="number" name="pages" id="pages" />
+            <input type="number" name="pages" required id="pages" />
 
             <label for="status">status</label>
-            <input type="text" name="status" id="status" />
+            <input type="text" name="status" required id="status" />
 
             <button class="btn btn__submit">Submit</button>
           </form>
