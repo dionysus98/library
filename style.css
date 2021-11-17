@@ -20,7 +20,7 @@ html {
   --font__default: "Red Hat Mono", monospace;
   --font__header: "Lobster", cursive;
   --border-right: 0.5px solid rgba(0, 0, 0, 0.5);
-  --transistion__default: all 0.4s;
+  --transistion__default: all 0.2s;
 }
 body {
   margin: 0 auto;
@@ -34,7 +34,7 @@ body {
 }
 .header {
   text-align: center;
-  border-bottom: var(--border-right);
+  /* border-bottom: var(--border-right); */
   text-transform: capitalize;
 }
 .header__title {
@@ -55,16 +55,18 @@ body {
 }
 .container__display {
   background-color: var(--color__main--light);
-  width: 75%;
+  width: 100%;
   overflow-y: scroll;
 }
 .container__control {
   width: 25%;
   background-color: var(--color__main--dark);
   color: var(--color__ter);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
+  background-color: var(--color__white);
+  resize: horizontal;
+  overflow: auto;
 }
-
 .status,
 .book-header,
 .book {
@@ -78,13 +80,13 @@ body {
 .status__read,
 .status__pending,
 .status__total {
-  width: 33.3%;
-  border-right: var(--border-right);
-  background-color: var(--color__ter);
+  width: calc(100% / 3);
+  /* border-right: var(--border-right); */
+  background-color: var(--color__white);
 }
 .book-header {
-  background-color: var(--color__sec--light);
-  color: var(--color__ter);
+  background-color: var(--color__white);
+  color: var(--color__sec);
 }
 
 .book {
@@ -128,20 +130,20 @@ body {
 .book__text--remove,
 .book-header__text--remove {
   width: 5%;
-  border-right: var(--border-right);
+  /* border-right: var(--border-right); */
 }
-#remove-book {
+.book__text--remove {
   color: var(--color__sec);
   transition: var(--transistion__default);
   cursor: pointer;
 }
-.book__text--remove:hover #remove-book {
+.book__text--remove:hover {
   color: orange;
   transform: scale(1.2) translate(0.5px, -2px);
   text-shadow: -1px 2px 2px var(--color__black);
   cursor: pointer;
 }
-.book__text--remove:active #remove-book {
+.book__text--remove:active {
   transform: scale(1.1) translate(0.1px, -0.5px);
   text-shadow: -0.3px 0.8px 1px var(--color__black);
   color: var(--color__white);
@@ -163,19 +165,80 @@ body {
   padding: 1.25rem;
   margin-bottom: 2rem;
   color: var(--color__sec);
-  background-color: var(--color__ter);
 }
+
 .book-control * {
   display: block;
   padding: 0.75rem;
   width: 80%;
   margin: 0.5rem auto;
-  color: var(--color__white);
   outline: none;
   border: none;
+  color: var(--color__sec);
 }
-.book-control > input {
-  color: var(--color__black);
+.book-control > input,
+.book-search > input {
+  background-color: var(--color__main--light);
+  outline: none;
+  color: var(--color__sec);
   font-family: inherit;
   font-size: var(--font__default);
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.book-control > input:focus,
+.book-search > input:focus {
+  background-color: var(--color__main--dark);
+  color: var(--color__white);
+}
+
+/* .book-control > label:hover {
+  width: 30%;
+  background-color: var(--color__sec);
+  color: var(--color__white);
+  text-align: center;
+  margin: 0 1rem;
+  transform: skew(1deg, -2deg);
+} */
+.book-search {
+  margin: 0 auto;
+  text-align: center;
+  color: var(--color__sec);
+}
+
+.book-search__input {
+  outline: none;
+  border: none;
+  display: block;
+  padding: 0.75rem;
+  width: 80%;
+  margin: 0.5rem auto;
+}
+
+.btn {
+  display: block;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color__sec);
+  color: var(--color__white);
+  margin: 3rem auto;
+  padding: 0.75rem;
+  width: 80%;
+  font-size: inherit;
+  transition: var(--transistion__default);
+}
+
+.btn:hover {
+  transform: translate(0.5px, -2px);
+  box-shadow: -4px 4px 4px var(--color__black);
+  background-color: var(--color__main--light);
+  color: var(--color__sec);
+}
+.btn:active {
+  transform: translate(0.5px, -0.5px);
+  box-shadow: -1.5px 1.5px 1px var(--color__black);
+  background-color: var(--color__white);
+  color: var(--color__sec);
 }
