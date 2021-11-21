@@ -19,7 +19,7 @@ html {
   --color__grey: #777;
   --font__default: "Red Hat Mono", monospace;
   --font__header: "Lobster", cursive;
-  --border-right: 0.5px solid rgba(0, 0, 0, 0.5);
+  --border-right: 0.5px solid var(--color__main);
   --transistion__default: all 0.2s;
 }
 body {
@@ -44,6 +44,7 @@ body {
   text-shadow: 1px 1px 2px var(--color__black);
   transition: var(--transistion__default);
   backface-visibility: hidden;
+  cursor: pointer;
 }
 .header__title:hover {
   transform: skewX(10deg) translateY(-4px);
@@ -57,15 +58,17 @@ body {
   background-color: var(--color__main--light);
   width: 100%;
   overflow-y: scroll;
+  font-size: 0.85rem;
 }
 .container__control {
   width: 25%;
   background-color: var(--color__main--dark);
   color: var(--color__ter);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   background-color: var(--color__white);
   resize: horizontal;
   overflow: auto;
+  border-right: var(--border-right);
 }
 .status,
 .book-header,
@@ -165,6 +168,7 @@ body {
   padding: 1.25rem;
   margin-bottom: 2rem;
   color: var(--color__sec);
+  /* border-bottom: var(--border-right); */
 }
 
 .book-control * {
@@ -182,7 +186,6 @@ body {
   outline: none;
   color: var(--color__sec);
   font-family: inherit;
-  font-size: var(--font__default);
   border-radius: 4px;
   font-weight: bold;
 }
@@ -193,14 +196,6 @@ body {
   color: var(--color__white);
 }
 
-/* .book-control > label:hover {
-  width: 30%;
-  background-color: var(--color__sec);
-  color: var(--color__white);
-  text-align: center;
-  margin: 0 1rem;
-  transform: skew(1deg, -2deg);
-} */
 .book-search {
   margin: 0 auto;
   text-align: center;
