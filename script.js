@@ -1,3 +1,5 @@
+import { books } from "./apiComponent.js";
+
 const readBooks = document.querySelector(".status__read--value");
 const pendingBooks = document.querySelector(".status__pending--value");
 const totalBooks = document.querySelector(".status__total--value");
@@ -19,26 +21,26 @@ const inputs = document.querySelectorAll("form > input");
 const generateBooks = (id, title, author, pages, status) => {
   const markUp = `
   <section class="book">
-    <div class="book__text--id">
-        <h2 class="book__text--header id-book" id="">${id}</h2>
-     </div>
-    <div class="book__text--title">
-        <h2 class="book__text--header title-book" id="">${title}</h2>
-     </div>
-    <div class="book__text--author">
-        <h2 class="book__text--header author-book" id="">${author}</h2>
-     </div>
-    <div class="book__text--pages">
-        <h2 class="book__text--header pages-book" id="">${pages}</h2>
-     </div>
-    <div class="book__text--status">
-        <h2 class="book__text--header status-book" id="">${status}</h2>
-     </div>
-    <div class="book__text--remove">
-        <h2 class="book__text--header remove-book" id="">X</h2>
-     </div>
-    </section>
-    `;
+  <div class="book__text--id">
+  <h2 class="book__text--header id-book" id="">${id}</h2>
+  </div>
+  <div class="book__text--title">
+  <h2 class="book__text--header title-book" id="">${title}</h2>
+  </div>
+  <div class="book__text--author">
+  <h2 class="book__text--header author-book" id="">${author}</h2>
+  </div>
+  <div class="book__text--pages">
+  <h2 class="book__text--header pages-book" id="">${pages}</h2>
+  </div>
+  <div class="book__text--status">
+  <h2 class="book__text--header status-book" id="">${status}</h2>
+  </div>
+  <div class="book__text--remove">
+  <h2 class="book__text--header remove-book" id="">X</h2>
+  </div>
+  </section>
+  `;
   bookContainer.insertAdjacentHTML("afterend", markUp);
 };
 
@@ -97,3 +99,5 @@ bookFormControl.addEventListener("submit", function (e) {
     inputValues = [];
   }
 });
+
+books("dom casmurro", "machado de assis");
