@@ -1,4 +1,3 @@
-"use strict";
 const readBooks = document.querySelector(".status__read--value");
 const pendingBooks = document.querySelector(".status__pending--value");
 const totalBooks = document.querySelector(".status__total--value");
@@ -11,7 +10,7 @@ let totalValue = 0;
 let inputValues = [];
 const persistData = [];
 
-const bookContainer = document.querySelector(".container__display");
+const bookContainer = document.querySelector(".book-header");
 
 const bookFormControl = document.querySelector(".book-control");
 const submitButton = document.querySelector(".btn__submit");
@@ -40,7 +39,7 @@ const generateBooks = (id, title, author, pages, status) => {
      </div>
     </section>
     `;
-  bookContainer.insertAdjacentHTML("beforeend", markUp);
+  bookContainer.insertAdjacentHTML("afterend", markUp);
 };
 
 const storeData = (data) => {
@@ -60,7 +59,6 @@ class Books {
     this.status = status;
   }
 }
-
 if (getLocalData() !== null) {
   const localBooks = getLocalData();
   console.log(localBooks);
@@ -68,7 +66,6 @@ if (getLocalData() !== null) {
     generateBooks(book.id, book.title, book.author, book.pages, book.status)
   );
 }
-
 bookFormControl.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -85,6 +82,9 @@ bookFormControl.addEventListener("submit", function (e) {
       inputValues[3],
       inputValues[4]
     );
+    if (persistData.length === 0 && getLocalData() !== null) {
+      persistData.push(...getLocalData());
+    }
     persistData.push(newBook);
     storeData(persistData);
     generateBooks(
@@ -97,7 +97,3 @@ bookFormControl.addEventListener("submit", function (e) {
     inputValues = [];
   }
 });
-
-if (persistData.length !== 0) {
-  storeData(persistData);
-}
