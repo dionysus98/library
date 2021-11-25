@@ -17,7 +17,7 @@
       <div class="container">
         <div class="container__control">
           <h2 class="container__control--main">Add Book</h2>
-          <form class="book-control">
+          <form class="book-control" autocomplete="off">
             <label for="book-id">Book ID</label>
             <input
               type="text"
@@ -37,7 +37,18 @@
             <input type="number" name="pages" required id="pages" />
 
             <label for="status">status</label>
-            <input type="text" name="status" required id="status" />
+            <input
+              type="text"
+              name="status"
+              value="completed"
+              required
+              id="status"
+            />
+
+            <div class="dropdown hidden">
+              <p class="dropdown-text">completed</p>
+              <p class="dropdown-text">pending</p>
+            </div>
 
             <button class="btn btn__submit">Submit</button>
           </form>
@@ -122,7 +133,12 @@
           </section> -->
           </div>
           <div class="info">
-            <p class="info__name">Avinash S</p>
+            <a
+              target="_blank"
+              class="info__name"
+              href="https://github.com/dionysus98/library"
+              >GITHUb</a
+            >
           </div>
         </div>
       </div>

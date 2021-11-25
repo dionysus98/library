@@ -3,7 +3,8 @@ import { books } from "./apiComponent.js";
 const readBooks = document.querySelector(".status__read--value");
 const pendingBooks = document.querySelector(".status__pending--value");
 const totalBooks = document.querySelector(".status__total--value");
-
+const statusInput = document.querySelector("#status");
+let statusDisplay;
 let inputValues = [];
 const persistData = [];
 
@@ -108,6 +109,8 @@ bookFormControl.addEventListener("submit", function (e) {
       return;
     }
 
+    statusDisplay = document.querySelectorAll(".status-book");
+
     //` persist Data into app if input values are valid
     if (persistData.length === 0 && localBooks) {
       persistData.push(...localBooks);
@@ -204,4 +207,32 @@ bookSearchContainer.addEventListener("submit", function (e) {
   setTimeout(() => {
     bookElement.style.backgroundColor = "#8ee4af";
   }, 4000);
+});
+
+//~ Status:
+//readBooks9
+//totalBooks
+//pendingBooks
+
+//~ Set book status
+statusInput.addEventListener("click", () => {
+  //` Display options:
+  document.querySelector(".dropdown").classList.remove("hidden");
+  document.querySelectorAll(".dropdown-text").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      //` select option:
+      statusInput.value = e.target.textContent;
+      document.querySelector(".dropdown").classList.add("hidden");
+    });
+  });
+});
+
+//~ Change book status
+document.querySelectorAll(".status-book").forEach((book) => {
+  book.closest(".book__text--status").addEventListener("click", () => {
+    const text = book.textContent;
+    if (text.toUpperCase() === "COMPLETED") book.textContent = "PENDING";
+    else if (text.toUpperCase() === "PENDING") book.textContent = "COMPLETED";
+    else book.textContent = "COMPLETED";
+  });
 });

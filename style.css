@@ -17,7 +17,7 @@ html {
   --color__black: #000;
   --color__white: #fff;
   --color__grey: #777;
-  --font__default: "Red Hat Mono", monospace;
+  --font__default: monospace;
   --font__header: "Lobster", cursive;
   --border-right: 0.5px solid var(--color__main);
   --transistion__default: all 0.2s;
@@ -29,7 +29,6 @@ body {
   text-transform: uppercase;
   overflow-y: scroll;
   overflow-x: hidden;
-  /* min-height: 100vh; */
 }
 .main {
   height: 100vh;
@@ -94,6 +93,13 @@ body {
   resize: horizontal;
   overflow: auto;
   border-right: var(--border-right);
+  backface-visibility: hidden;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.container__control::-webkit-scrollbar {
+  display: none;
 }
 
 .status,
@@ -110,7 +116,6 @@ body {
 .status__pending,
 .status__total {
   width: calc(100% / 3);
-  /* border-right: var(--border-right); */
   background-color: var(--color__sec);
   color: var(--color__white);
 }
@@ -122,7 +127,7 @@ body {
 .book {
   padding: 1rem 0;
   transition: var(--transistion__default);
-  /* background-color: var(--color__main--dark); */
+  font-size: inherit;
 }
 .book > *:hover {
   transform: scale(1.1) skew(-2deg, 0.5deg) translate(1.2px, -1.3px);
@@ -156,11 +161,11 @@ body {
   width: 20%;
   border-right: var(--border-right);
   transition: var(--transistion__default);
+  font-size: inherit;
 }
 .book__text--remove,
 .book-header__text--remove {
   width: 5%;
-  /* border-right: var(--border-right); */
 }
 .book__text--remove {
   color: var(--color__sec);
@@ -178,13 +183,16 @@ body {
   text-shadow: -0.3px 0.8px 1px var(--color__black);
   color: var(--color__white);
 }
-.book__text--status:hover {
+.book__text--status:hover,
+.book-header__text--status:hover {
   cursor: pointer;
 }
-.book__text--status:focus {
+.book__text--status:focus,
+.book-header__text--status:focus {
   transform: translate(0.5px, -1.5px);
 }
-.book__text--status:active {
+.book__text--status:active,
+.book-header__text--status:active {
   transform: translate(0.2px, -0.3px);
   background-color: var(--color__white);
   color: var(--color__black);
@@ -195,7 +203,6 @@ body {
   padding: 1.25rem;
   margin-bottom: 2rem;
   color: var(--color__sec);
-  /* border-bottom: var(--border-right); */
 }
 
 .book-control * {
@@ -223,10 +230,30 @@ body {
   color: var(--color__white);
 }
 
+.dropdown {
+  /* display: none; */
+  text-align: center;
+  background-color: var(--color__main);
+  cursor: pointer;
+}
+.dropdown-text {
+  color: var(--color__white);
+  width: 100%;
+  margin: 0;
+}
+.dropdown-text:hover {
+  background-color: var(--color__main--light);
+  color: var(--color__black);
+}
 .book-search {
   margin: 0 auto;
   text-align: center;
   color: var(--color__sec);
+}
+
+#status:focus + .dropdown,
+#status:active + .dropdown {
+  display: block;
 }
 
 .book-search__input {
@@ -241,19 +268,23 @@ body {
 .info {
   text-align: center;
   margin-top: 2rem;
-  color: var(--color__main--dark);
-  transition: var(--transistion__default);
   cursor: pointer;
 }
-.info:hover {
-  transform: scale(1.8);
+.info__name {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--color__main--dark);
+  transition: var(--transistion__default);
+}
+.info__name:hover {
+  transform: scale(1.4) skew(-2deg, 0.5deg);
   color: var(--color__white);
   font-family: inherit;
-  text-shadow: 0.3px 0.5px 2px var(--color__black);
+  background-color: var(--color__sec);
+  width: 10%;
 }
-.info:active {
-  transform: scale(1.4);
-  text-shadow: 0.1px 0.2px 1px var(--color__black);
+.info__name:active {
+  transform: scale(1.2);
 }
 
 .btn {
@@ -281,4 +312,8 @@ body {
   box-shadow: -1.5px 1.5px 1px var(--color__black);
   background-color: var(--color__white);
   color: var(--color__sec);
+}
+
+.hidden {
+  display: none;
 }
