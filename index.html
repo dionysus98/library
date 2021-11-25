@@ -42,9 +42,9 @@
             <button class="btn btn__submit">Submit</button>
           </form>
 
-          <div class="book-search">
+          <form class="book-search">
             <h2 class="container__control--sub">Book Search</h2>
-            <label for="search">Book-ID</label>
+            <label for="search">Book-ID/ Author /Title</label>
             <input
               type="text"
               name="search"
@@ -52,50 +52,51 @@
               class="book-search__input"
               required
             />
-            <button class="btn btn__search">search</button>
-          </div>
+            <button type="submit" class="btn btn__search">search</button>
+          </form>
         </div>
         <div class="container__display">
-          <section class="status">
-            <div class="status__read">
-              <h2 class="status__read--title">
-                Read: <span class="status__read--value">0</span>
-              </h2>
-            </div>
-            <div class="status__pending">
-              <h2 class="status__pending--title">
-                Pending: <span class="status__pending--value">0</span>
-              </h2>
-            </div>
-            <div class="status__total">
-              <h2 class="status__total--title">
-                total: <span class="status__total--value">0</span>
-              </h2>
-            </div>
-          </section>
-
-          <section class="book-header">
-            <div class="book-header__text--id">
-              <h2 class="">ID</h2>
-            </div>
-            <div class="book-header__text--title">
-              <h2 class="">Title</h2>
-            </div>
-            <div class="book-header__text--author">
-              <h2 class="">Author</h2>
-            </div>
-            <div class="book-header__text--pages">
-              <h2 class="">Pages</h2>
-            </div>
-            <div class="book-header__text--status">
-              <h2 class="">Status</h2>
-            </div>
-            <div class="book-header__text--remove">
-              <h2 class="">Del</h2>
-            </div>
-          </section>
-
-          <!-- <section class="book">
+          <div class="container__display-header">
+            <section class="book-header">
+              <div class="book-header__text--id">
+                <h2 class="">ID</h2>
+              </div>
+              <div class="book-header__text--title">
+                <h2 class="">Title</h2>
+              </div>
+              <div class="book-header__text--author">
+                <h2 class="">Author</h2>
+              </div>
+              <div class="book-header__text--pages">
+                <h2 class="">Pages</h2>
+              </div>
+              <div class="book-header__text--status">
+                <h2 class="">Status</h2>
+              </div>
+              <div class="book-header__text--remove">
+                <h2 class="">Del</h2>
+              </div>
+            </section>
+            <section class="status">
+              <div class="status__read">
+                <h2 class="status__read--title">
+                  Read: <span class="status__read--value">0</span>
+                </h2>
+              </div>
+              <div class="status__pending">
+                <h2 class="status__pending--title">
+                  Pending: <span class="status__pending--value">0</span>
+                </h2>
+              </div>
+              <div class="status__total">
+                <h2 class="status__total--title">
+                  total: <span class="status__total--value">0</span>
+                </h2>
+              </div>
+            </section>
+          </div>
+          <div class="container__display-book">
+            <!-- <section class="book">
             <div class="book__text--id">
               <h2 class="book__text--header id-book" id="">ID</h2>
             </div>
@@ -119,6 +120,10 @@
               <h2 class="book__text--header remove-book" id="">X</h2>
             </div>
           </section> -->
+          </div>
+          <div class="info">
+            <p class="info__name">Avinash S</p>
+          </div>
         </div>
       </div>
     </main>

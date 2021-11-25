@@ -27,15 +27,17 @@ body {
   background-color: var(--color__main);
   font-family: var(--font__default);
   text-transform: uppercase;
-  /* overflow: hidden; */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /* min-height: 100vh; */
 }
 .main {
-  max-height: 100vh;
+  height: 100vh;
 }
 .header {
   text-align: center;
-  /* border-bottom: var(--border-right); */
   text-transform: capitalize;
+  max-height: 10%;
 }
 .header__title {
   font-family: var(--font__header);
@@ -52,13 +54,36 @@ body {
 }
 .container {
   display: flex;
-  height: 100vh;
+  max-height: 90%;
 }
 .container__display {
   background-color: var(--color__main--light);
   width: 100%;
-  overflow-y: scroll;
   font-size: 0.85rem;
+  position: relative;
+}
+.container__display-header {
+  max-height: 5.3%;
+  backface-visibility: hidden;
+  overflow: auto;
+  backface-visibility: hidden;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.container__display-header::-webkit-scrollbar {
+  display: none;
+}
+.container__display-book {
+  overflow-y: scroll;
+  scrollbar-width: none;
+  max-height: 89%;
+  backface-visibility: hidden;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+}
+.container__display-book::-webkit-scrollbar {
+  display: none;
 }
 .container__control {
   width: 25%;
@@ -70,6 +95,7 @@ body {
   overflow: auto;
   border-right: var(--border-right);
 }
+
 .status,
 .book-header,
 .book {
@@ -85,7 +111,8 @@ body {
 .status__total {
   width: calc(100% / 3);
   /* border-right: var(--border-right); */
-  background-color: var(--color__white);
+  background-color: var(--color__sec);
+  color: var(--color__white);
 }
 .book-header {
   background-color: var(--color__white);
@@ -209,6 +236,24 @@ body {
   padding: 0.75rem;
   width: 80%;
   margin: 0.5rem auto;
+}
+
+.info {
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--color__main--dark);
+  transition: var(--transistion__default);
+  cursor: pointer;
+}
+.info:hover {
+  transform: scale(1.8);
+  color: var(--color__white);
+  font-family: inherit;
+  text-shadow: 0.3px 0.5px 2px var(--color__black);
+}
+.info:active {
+  transform: scale(1.4);
+  text-shadow: 0.1px 0.2px 1px var(--color__black);
 }
 
 .btn {

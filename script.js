@@ -4,49 +4,49 @@ const readBooks = document.querySelector(".status__read--value");
 const pendingBooks = document.querySelector(".status__pending--value");
 const totalBooks = document.querySelector(".status__total--value");
 
-let readValue = 0;
-let pendingValue = 0;
-let totalValue = 0;
 let inputValues = [];
 const persistData = [];
 
-const bookContainer = document.querySelector(".book-header");
+const bookContainer = document.querySelector(".container__display-book");
 
 const bookFormControl = document.querySelector(".book-control");
-const submitButton = document.querySelector(".btn__submit");
 
 const inputs = document.querySelectorAll("form > input");
 
+const bookSearchContainer = document.querySelector(".book-search");
+const bookSearchInput = document.querySelector(".book-search__input");
+
+let localBooks;
 let removeBook;
 
-//~ Generate Markup
+//~ Generate Markup:
 const generateBooks = (id, title, author, pages, status) => {
   const markUp = `
   <section class="book" id="${id}">
   <div class="book__text--id">
-  <h2 class="book__text--header id-book" id="">${id}</h2>
+  <h2 class="book__text--header id-book">${id}</h2>
   </div>
   <div class="book__text--title">
-  <h2 class="book__text--header title-book" id="">${title}</h2>
+  <h2 class="book__text--header title-book">${title}</h2>
   </div>
   <div class="book__text--author">
-  <h2 class="book__text--header author-book" id="">${author}</h2>
+  <h2 class="book__text--header author-book">${author}</h2>
   </div>
   <div class="book__text--pages">
-  <h2 class="book__text--header pages-book" id="">${pages}</h2>
+  <h2 class="book__text--header pages-book">${pages}</h2>
   </div>
   <div class="book__text--status">
-  <h2 class="book__text--header status-book" id="">${status}</h2>
+  <h2 class="book__text--header status-book">${status}</h2>
   </div>
   <div class="book__text--remove">
-  <h2 class="book__text--header remove-book" id="">X</h2>
+  <h2 class="book__text--header remove-book">X</h2>
   </div>
   </section>
   `;
-  bookContainer.insertAdjacentHTML("afterend", markUp);
+  bookContainer.insertAdjacentHTML("afterbegin", markUp);
 };
 
-//~ Local storage functions
+//~ Local storage functions:
 const storeData = (data) => {
   localStorage.setItem("books", JSON.stringify(data));
 };
@@ -55,7 +55,7 @@ const getLocalData = () => {
   return JSON.parse(data);
 };
 
-//~ Books class
+//~ Books class:
 class Books {
   constructor(id, title, author, pages, status) {
     this.id = id;
@@ -64,11 +64,14 @@ class Books {
     this.pages = pages;
     this.status = status;
   }
+  _checkID() {
+    return localBooks.every((book) => book.id !== this.id);
+  }
 }
 
 //~ Get Data from Local Storage:
 if (getLocalData() !== null) {
-  const localBooks = getLocalData();
+  localBooks = getLocalData();
   totalBooks.textContent = localBooks.length;
 
   localBooks.forEach((book) =>
@@ -89,16 +92,25 @@ bookFormControl.addEventListener("submit", function (e) {
   //` create book object from input values
   if (inputValues.length === 5) {
     const newBook = new Books(
-      inputValues[0],
-      inputValues[1],
-      inputValues[2],
-      inputValues[3],
-      inputValues[4]
+      inputValues[0].trim(),
+      inputValues[1].trim(),
+      inputValues[2].trim(),
+      inputValues[3].trim(),
+      inputValues[4].trim()
     );
 
+    //` Guard clause : Check for unique id
+    if (!newBook._checkID()) {
+      inputValues = [];
+      inputs.forEach((input) => {
+        input.value = "";
+      });
+      return;
+    }
+
     //` persist Data into app if input values are valid
-    if (persistData.length === 0 && getLocalData() !== null) {
-      persistData.push(...getLocalData());
+    if (persistData.length === 0 && localBooks) {
+      persistData.push(...localBooks);
     }
     persistData.push(newBook);
     totalBooks.textContent = persistData.length;
@@ -115,30 +127,81 @@ bookFormControl.addEventListener("submit", function (e) {
       newBook.status
     );
 
+    //` Select Books to Remove
+    removeBook = document.querySelectorAll(".book__text--remove");
+    removeBook.forEach((book) => {
+      book.addEventListener("click", (e) => {
+        removeBookFunction(e);
+      });
+    });
+
     //` Empty the values, for new book
     inputValues = [];
+    inputs.forEach((input) => {
+      input.value = "";
+    });
   }
 });
 
-//~ Remove Book
+//~ Select Books to Remove:
 removeBook = document.querySelectorAll(".book__text--remove");
 removeBook.forEach((book) => {
   book.addEventListener("click", (e) => {
-    console.log(e.target);
-    //` Get Selected book
-    const curBookId = e.target.closest(".book").attributes.id.value;
-    const selectedBook = document.getElementById(curBookId);
-
-    //` Remove Selected Book
-    selectedBook.remove();
-
-    //` Get & manipulate local data
-    const localData = getLocalData();
-    const newData = localData.filter((data) => data.id !== curBookId);
-
-    //` Store new data in localStorage
-    localStorage.setItem("books", JSON.stringify(newData));
+    removeBookFunction(e);
   });
 });
 
+//~ Remove book function:
+function removeBookFunction(e) {
+  //` Get Selected book
+  const curBookId = e.target.closest(".book").attributes.id.value;
+  const selectedBook = document.getElementById(curBookId);
+
+  //` Remove Selected Book
+  selectedBook.remove();
+
+  //` Get & manipulate local data
+  let newData;
+  if (getLocalData() !== null)
+    newData = getLocalData().filter((data) => data.id !== curBookId);
+  else newData = persistData().filter((data) => data.id !== curBookId);
+
+  //` Store new data in localStorage
+  localStorage.setItem("books", JSON.stringify(newData));
+}
+
 // books("dom casmurro", "machado de assis");
+
+//~ Book Search:
+bookSearchContainer.addEventListener("submit", function (e) {
+  e.preventDefault();
+  //` Get input value
+  const bookInput = bookSearchInput.value;
+
+  //` Filter data
+  const resultBook = localBooks.filter(
+    (book) =>
+      book.id.toLowerCase() === bookInput.toLowerCase() ||
+      book.title.toLowerCase() === bookInput.toLowerCase() ||
+      book.author.toLowerCase() === bookInput.toLowerCase()
+  );
+
+  //` Guard Clause: if filtered value is empty
+  if (resultBook.length === 0) return (bookSearchInput.value = "");
+
+  //` Select the filtered element
+  const bookElement = document.getElementById(`${resultBook[0].id}`);
+
+  //` Highlight the selceted element
+  bookElement.closest(".book").scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+  });
+  bookElement.style.backgroundColor = "#379683";
+  bookSearchInput.value = "";
+
+  //` Remove highlighting
+  setTimeout(() => {
+    bookElement.style.backgroundColor = "#8ee4af";
+  }, 4000);
+});
