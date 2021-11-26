@@ -62,7 +62,7 @@ body {
   position: relative;
 }
 .container__display-header {
-  max-height: 5.3%;
+  max-height: 37px;
   backface-visibility: hidden;
   overflow: auto;
   backface-visibility: hidden;
@@ -91,16 +91,14 @@ body {
   font-size: 1.3rem;
   background-color: var(--color__white);
   resize: horizontal;
-  overflow: auto;
+  overflow: hidden;
   border-right: var(--border-right);
-  backface-visibility: hidden;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  /* backface-visibility: hidden;
+  scroll-behavior: smooth; */
 }
-.container__control::-webkit-scrollbar {
+/* .container__control::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .status,
 .book-header,
