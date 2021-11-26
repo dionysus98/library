@@ -5,17 +5,16 @@ const pendingBooks = document.querySelector(".status__pending--value");
 const totalBooks = document.querySelector(".status__total--value");
 const statusInput = document.querySelector("#status");
 
-let inputValues = [];
-const persistData = [];
-
 const bookContainer = document.querySelector(".container__display-book");
-
 const bookFormControl = document.querySelector(".book-control");
-
-const inputs = document.querySelectorAll("form > input");
 
 const bookSearchContainer = document.querySelector(".book-search");
 const bookSearchInput = document.querySelector(".book-search__input");
+
+const inputs = document.querySelectorAll("form > input");
+
+let inputValues = [];
+const persistData = [];
 
 let localBooks;
 let removeBook;
@@ -78,6 +77,8 @@ if (getLocalData() !== null) {
   localBooks.forEach((book) =>
     generateBooks(book.id, book.title, book.author, book.pages, book.status)
   );
+  //` update user reading log
+  updateBookLog();
 }
 
 //~ Create Book:
@@ -128,6 +129,9 @@ bookFormControl.addEventListener("submit", function (e) {
       newBook.pages,
       newBook.status
     );
+
+    //` update user reading log
+    updateBookLog();
 
     //` Select Books to Remove
     removeBook = document.querySelectorAll(".book__text--remove");
@@ -212,11 +216,6 @@ bookSearchContainer.addEventListener("submit", function (e) {
   }, 4000);
 });
 
-//~ Status:
-//readBooks9
-//totalBooks
-//pendingBooks
-
 //~ Set book status
 statusInput.addEventListener("click", () => {
   //` Display options:
@@ -251,9 +250,13 @@ document.querySelectorAll(".status-book").forEach((book) => {
     if (text.toUpperCase() === "COMPLETED") {
       book.textContent = "PENDING";
       statusUpdate(bookId, "pending");
+      readBooks.textContent = 1 * readBooks.textContent - 1;
+      pendingBooks.textContent = 1 * pendingBooks.textContent + 1;
     } else if (text.toUpperCase() === "PENDING") {
       book.textContent = "COMPLETED";
       statusUpdate(bookId, "completed");
+      readBooks.textContent = 1 * readBooks.textContent + 1;
+      pendingBooks.textContent = 1 * pendingBooks.textContent - 1;
     } else {
       book.textContent = "COMPLETED";
     }
@@ -263,11 +266,14 @@ document.querySelectorAll(".status-book").forEach((book) => {
   });
 });
 
-document
-  .querySelector(".container__display")
-  .addEventListener("scroll", function (e) {
-    const coords = this.getBoundingClientRect();
-    console.log(coords);
+//~ update function - pending and completed book:
+function updateBookLog() {
+  localBooks.forEach((book) => {
+    if (book.status === "completed") {
+      readBooks.textContent = 1 * readBooks.textContent + 1;
+    }
+    if (book.status === "pending") {
+      pendingBooks.textContent = 1 * pendingBooks.textContent + 1;
+    }
   });
-
-//~ update pending and completed book:
+}

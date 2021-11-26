@@ -91,15 +91,9 @@ body {
   font-size: 1.3rem;
   background-color: var(--color__white);
   resize: horizontal;
-  overflow: hidden;
+  overflow: auto;
   border-right: var(--border-right);
-  /* backface-visibility: hidden;
-  scroll-behavior: smooth; */
 }
-/* .container__control::-webkit-scrollbar {
-  display: none;
-} */
-
 .status,
 .book-header,
 .book {
