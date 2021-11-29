@@ -84,6 +84,26 @@ body {
 .container__display-book::-webkit-scrollbar {
   display: none;
 }
+
+.container__display-preview {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  background-color: var(--color__white);
+  font-size: 1.4rem;
+  text-align: center;
+  width: 25%;
+  height: 60%;
+  opacity: 0.9;
+  overflow: scroll;
+  border-radius: 9px;
+}
+.container__display-preview:hover {
+  opacity: 1;
+}
+.container__display-preview::-webkit-scrollbar {
+  display: none;
+}
 .container__control {
   width: 25%;
   background-color: var(--color__main--dark);
@@ -93,6 +113,50 @@ body {
   resize: horizontal;
   overflow: auto;
   border-right: var(--border-right);
+}
+.preview__header {
+  display: flex;
+  cursor: move;
+}
+.preview__content {
+  font-weight: bold;
+  margin: 1rem;
+}
+.preview__text {
+  font-weight: normal;
+}
+.preview__link {
+  text-align: center;
+  text-overflow: ellipsis;
+}
+.preview__thumbnail {
+  margin-top: 0.5rem;
+}
+.preview__title,
+.preview__btn-close {
+  background-color: var(--color__sec);
+  font-size: 1.4rem;
+  padding: 1.2rem;
+  color: var(--color__white);
+  margin: 0;
+}
+.preview__title {
+  width: 90%;
+}
+.preview__btn-close {
+  width: 10%;
+  padding-right: 2rem;
+  text-align: center;
+  transition: var(--transistion__default);
+  cursor: pointer;
+}
+.preview__btn-close:hover {
+  transform: translate(2px, -5px);
+  color: salmon;
+}
+.preview__btn-close:active {
+  transform: translate(0.5px, -1px);
+  color: bisque;
 }
 .status,
 .book-header,
@@ -138,6 +202,9 @@ body {
   width: 30%;
   border-right: var(--border-right);
 }
+.book__text--title {
+  transition: var(--transistion__default);
+}
 .book__text--author,
 .book-header__text--author {
   width: 30%;
@@ -176,15 +243,15 @@ body {
   color: var(--color__white);
 }
 .book__text--status:hover,
-.book-header__text--status:hover {
+.book__text--title:hover {
   cursor: pointer;
 }
 .book__text--status:focus,
-.book-header__text--status:focus {
+.book__text--title:focus {
   transform: translate(0.5px, -1.5px);
 }
 .book__text--status:active,
-.book-header__text--status:active {
+.book__text--title:active {
   transform: translate(0.2px, -0.3px);
   background-color: var(--color__white);
   color: var(--color__black);
