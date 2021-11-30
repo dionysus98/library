@@ -1,5 +1,4 @@
 import { books } from "./apiComponent.js";
-import { dragElement } from "./layoutComponent.js";
 
 const readBooks = document.querySelector(".status__read--value");
 const pendingBooks = document.querySelector(".status__pending--value");
@@ -279,81 +278,9 @@ function updateBookLog() {
 //~ Fetch Book from API
 document.querySelectorAll(".title-book").forEach((book) =>
   book.closest(".book__text--title").addEventListener("click", function (e) {
+    //`get selected book
     const target = e.target.textContent.trim();
     const bookSelected = localBooks.find((book) => target === book.title);
-    (async () => {
-      try {
-        const bookFetched = await books(
-          `${bookSelected.title}`,
-          `${bookSelected.author}`
-        );
-        const book = {
-          title: bookFetched.title || "",
-          authors: bookFetched.authors || "",
-          categories: bookFetched.categories || "",
-          imageLinks: bookFetched.imageLinks || "",
-          description: bookFetched.description || "",
-          pageCount: bookFetched.pageCount || "",
-          previewLink: bookFetched.previewLink || "",
-          publishedDate: bookFetched.publishedDate || "",
-        };
-        generateBookPreview(book);
-        document
-          .querySelector(".container__display-preview")
-          .classList.remove("hidden");
-      } catch (err) {
-        console.log(err.message);
-      }
-    })();
+    books(`${bookSelected.title}`, `${bookSelected.author}`);
   })
 );
-
-function generateBookPreview(book) {
-  const markup = `
-  <div class="preview__header">
-  <h3 class="preview__title">${book.title}</h3>
-  <p class="preview__btn-close">X</p>
-  </div>
-  <div class="preview__thumbnail">
-  <img
-  src=${book.imageLinks.thumbnail}
-  alt=""
-  class="thumbnail__img"
-  width="40%"
-  />
-  </div>
-  <div class="preview__details">
-  <p class="preview__content">
-  Author: <span class="preview__text">${book.authors}</span>
-  </p>
-  <p class="preview__content">
-  Category: <span class="preview__text">${book.categories}</span>
-  </p>
-  <p class="preview__content">
-  Description: <span class="preview__text">${book.description}</span>
-  </p>
-  <p class="preview__content">
-  Pages: <span class="preview__text">${book.pageCount}</span>
-    </p>
-    <p class="preview__content">
-    Published Date: <span class="preview__text">${book.publishedDate}</span>
-    </p>
-    <p class="preview__content preview__link">
-    Preview Link: <span class="preview__text preview__link-text">${book.previewLink}</span>
-    </p>
-    </div>
-    `;
-  document
-    .querySelector(".container__display-previewheader")
-    .insertAdjacentHTML("afterbegin", markup);
-
-  dragElement(document.querySelector(".container__display-preview"));
-
-  document
-    .querySelector(".preview__btn-close")
-    .addEventListener("click", () => {
-      document
-        .querySelector(".container__display-preview")
-        .classList.add("hidden");
-    });
-}
