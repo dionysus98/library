@@ -16,7 +16,7 @@ const inputs = document.querySelectorAll("form > input");
 let inputValues = [];
 const persistData = [];
 
-let localBooks;
+let localBooks = [];
 let removeBook;
 
 //~ Generate Markup:
@@ -102,12 +102,14 @@ bookFormControl.addEventListener("submit", function (e) {
     );
 
     //` Guard clause : Check for unique id
-    if (!newBook._checkID()) {
-      inputValues = [];
-      inputs.forEach((input) => {
-        input.value = "";
-      });
-      return;
+    if (localBooks) {
+      if (!newBook._checkID()) {
+        inputValues = [];
+        inputs.forEach((input) => {
+          input.value = "";
+        });
+        return;
+      }
     }
 
     //` persist Data into app if input values are valid
